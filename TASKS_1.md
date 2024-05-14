@@ -20,6 +20,6 @@ Wykonano : NULL
 
 MARCIN:
 TASK 1
-Wykonać w branchu main foldery src, include oraz test
+Wykonać w branchu main pliki src, include oraz test
 DEADLINE: 15.05.2024r
 Wykonano : V
