@@ -18,10 +18,12 @@ class Calculator:
         self._save_to_history(f"multiply({a}, {b}) = {result}")
         return result
     def divide(self, a, b):
-
+        pass
     def power(self, a, b):
+        pass
 
     def sqrt(self, a):
+        pass
 
     
     
