@@ -3,7 +3,11 @@ import math
 
 class Calculator:
 
-    def add(self, a, b):
+    
+    def addition(a, b) :
+        result = a + b
+        self._save_to_history(f"add({a}, {b}) = {result}")
+        return result
 
     def substract(self, a, b):
 
