@@ -8,7 +8,9 @@ class Calculator:
     def substract(self, a, b):
 
     def multiply(self, a, b):
-
+        result = a * b
+        self._save_to_history(f"multiply({a}, {b}) = {result}")
+        return result
     def divide(self, a, b):
 
     def power(self, a, b):
