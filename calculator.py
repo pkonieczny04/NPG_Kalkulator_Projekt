@@ -1,4 +1,6 @@
 #Plik nagłówkowy
+import math
+
 class Calculator:
 
     def add(self, a, b):
@@ -13,4 +15,5 @@ class Calculator:
 
     def sqrt(self, a):
 
+    
     
