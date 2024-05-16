@@ -2,8 +2,10 @@
 import math
 
 class Calculator:
+    def __init__(self):
+        self.history = []
 
-    def addition(a, b) :
+    def addition(self, a, b) :
         result = a + b
         self._save_to_history(f"add({a}, {b}) = {result}")
         return result
