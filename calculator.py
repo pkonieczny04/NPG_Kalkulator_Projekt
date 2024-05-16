@@ -3,7 +3,9 @@ import math
 
 class Calculator:
 
-    def add(self, a, b):
+    
+    def addition(a, b) :
+        return a + b
 
     def substract(self, a, b):
 
