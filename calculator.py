@@ -5,7 +5,9 @@ class Calculator:
 
     
     def addition(a, b) :
-        return a + b
+        result = a + b
+        self._save_to_history(f"add({a}, {b}) = {result}")
+        return result
 
     def substract(self, a, b):
 
