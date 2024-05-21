@@ -8,3 +8,16 @@ Czyszczenie pamięci.
 Obsługa licz zespolonych.
 Tryb okienkowy.
 Przeprowadzenie działań na podstawie stringu zgodnie z kolejnością.
+
+
+Sprint 1:
+Rozpoczęcie pracy.
+
+Sprint 2:
+Dokończnie pliku test i komponentu.
+
+Sprint 3:
+Napisanie funkcji main i operacji na stringu.
+
+Sprint 4:
+Tryb okienkowy.
