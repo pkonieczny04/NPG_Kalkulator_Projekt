@@ -7,3 +7,4 @@ Odwołanie się do zapamiętanego zadania.
 Czyszczenie pamięci.
 Obsługa licz zespolonych.
 Tryb okienkowy.
+Przeprowadzenie działań na podstawie stringu zgodnie z kolejnością.
