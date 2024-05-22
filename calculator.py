@@ -8,9 +8,9 @@ class Calculator:
         else:
             return a + b
 
-    def substract(self, a, b):
+    def subtract(self, a, b):
         if isinstance(a, Complex) and isinstance(b, Complex):
-            return a.substract(b)
+            return a.subtract(b)
         else:
             return a - b
 
@@ -29,10 +29,14 @@ class Calculator:
             return a / b
 
     def power(self, a, b):
-        pass
+        result = a ** b
+        return result
 
     def sqrt(self, a):
-        pass  
+        if a < 0:
+            raise ValueError("Cannot take the square root of a negative number")
+        result = a ** 0.5
+        return result  
 
     
 class Complex:
@@ -43,7 +47,7 @@ class Complex:
     def add(self, other):
         return Complex(self.real + other.real, self.im + other.im)
 
-    def substract(self, other):
+    def subtract(self, other):
         return Complex(self.real - other.real, self.im - other.im)
 
     def multiply(self, other):
