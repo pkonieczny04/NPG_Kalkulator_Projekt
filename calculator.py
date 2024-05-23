@@ -5,35 +5,54 @@ class Calculator:
 
     def __init__(self):
         self.history = []
+
+    def _save_to_history(self, operation):
+        if len(self.history) < 10:
+            self.history.append(operation)
+        else
+            self.history.insert(0, operation)
+            self.history.pop()
+            
+
+    def get_history(self):
+        for i in self.history:
+            print(i)
+
+    def clear_history(self):
+        self.history=[]
          
     def add(self, a, b):
         if isinstance(a, Complex) and isinstance(b, Complex):
+            self._save_to_history(f"{a} +{b} = {a+b}")
             return a.add(b)
         else:
-            self._save_to_history(f"add({a}, {b}) = {a+b}")
+            self._save_to_history(f"{a} +{b} = {a+b}")
             return a + b
 
     def subtract(self, a, b):
         if isinstance(a, Complex) and isinstance(b, Complex):
+            self._save_to_history(f"{a}, {b} = {a-b}")
             return a.subtract(b)
         else:
-            self._save_to_history(f"subtract({a}, {b}) = {a-b}")
+            self._save_to_history(f"{a}, {b} = {a-b}")
             return a - b
 
     def multiply(self, a, b):
         if isinstance(a, Complex) and isinstance(b, Complex):
+            self._save_to_history(f"{a} * {b} = {a*b}")
             return a.multiply(b)
         else:
-            self._save_to_history(f"multiply({a}, {b}) = {a*b}")
+            self._save_to_history(f"{a} * {b} = {a*b}")
             return a * b
 
     def divide(self, a, b):
         if isinstance(a, Complex) and isinstance(b, Complex):
+            self._save_to_history(f"{a} / {b} = {a/b}")
             return a.divide(b)
         else:
             if b == 0:
                 raise ValueError("Cannot divide by zero")
-            self._save_to_history(f"divide({a}, {b}) = {a/b}")
+            self._save_to_history(f"{a} / {b} = {a/b}")
             return a / b
 
     def power(self, a, b):
