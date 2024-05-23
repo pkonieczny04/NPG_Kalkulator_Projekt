@@ -3,7 +3,7 @@ import math
 
 class Calculator:
 
-     def __init__(self):
+    def __init__(self):
         self.history = []
          
     def add(self, a, b):
@@ -13,9 +13,9 @@ class Calculator:
             self._save_to_history(f"add({a}, {b}) = {a+b}")
             return a + b
 
-    def substract(self, a, b):
+    def subtract(self, a, b):
         if isinstance(a, Complex) and isinstance(b, Complex):
-            return a.substract(b)
+            return a.subtract(b)
         else:
             self._save_to_history(f"subtract({a}, {b}) = {a-b}")
             return a - b
@@ -51,7 +51,7 @@ class Complex:
     def add(self, other):
         return Complex(self.real + other.real, self.im + other.im)
 
-    def substract(self, other):
+    def subtract(self, other):
         return Complex(self.real - other.real, self.im - other.im)
 
     def multiply(self, other):

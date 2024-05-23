@@ -1,5 +1,5 @@
 import unittest
-from calculator import Calculator
+from calculator import Calculator, Complex
 
 class TestCalculator(unittest.TestCase):
     
@@ -21,3 +21,46 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(self.calc.multiply(4, 6), 24)
         self.assertEqual(self.calc.multiply(-3, 2), -6)
         self.assertEqual(self.calc.multiply(-5, -2), 10)
+
+class TestCalculatorComplex(unittest.TestCase):
+
+    def setUp(self):
+        self.calc = Calculator()
+
+    def test_add_complex(self):
+        a = Complex(1, 2)
+        b = Complex(3, 4)
+        result = self.calc.add(a, b)
+        self.assertEqual(result.real, 4)
+        self.assertEqual(result.im, 6)
+
+    def test_subtract_complex(self):
+        a = Complex(5, 7)
+        b = Complex(2, 3)
+        result = self.calc.subtract(a, b)
+        self.assertEqual(result.real, 3)
+        self.assertEqual(result.im, 4)
+
+    def test_multiply_complex(self):
+        a = Complex(2, 3)
+        b = Complex(4, 5)
+        result = self.calc.multiply(a, b)
+        self.assertEqual(result.real, -7)
+        self.assertEqual(result.im, 22)
+
+    def test_divide_complex(self):
+        a = Complex(5, 6)
+        b = Complex(1, 2)
+        result = self.calc.divide(a, b)
+        self.assertAlmostEqual(result.real, 3.4, places=1)
+        self.assertAlmostEqual(result.im, -0.8, places=1)
+
+    def test_divide_complex_by_zero(self):
+        a = Complex(1, 1)
+        b = Complex(0, 0)
+        with self.assertRaises(ValueError):
+            self.calc.divide(a, b)
+
+if __name__ == '__main__':
+    unittest.main()
+
