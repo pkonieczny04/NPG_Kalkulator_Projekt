@@ -2,22 +2,29 @@
 import math
 
 class Calculator:
+
+     def __init__(self):
+        self.history = []
+         
     def add(self, a, b):
         if isinstance(a, Complex) and isinstance(b, Complex):
             return a.add(b)
         else:
+            self._save_to_history(f"add({a}, {b}) = {a+b}")
             return a + b
 
     def substract(self, a, b):
         if isinstance(a, Complex) and isinstance(b, Complex):
             return a.substract(b)
         else:
+            self._save_to_history(f"subtract({a}, {b}) = {a-b}")
             return a - b
 
     def multiply(self, a, b):
         if isinstance(a, Complex) and isinstance(b, Complex):
             return a.multiply(b)
         else:
+            self._save_to_history(f"multiply({a}, {b}) = {a*b}")
             return a * b
 
     def divide(self, a, b):
@@ -26,6 +33,7 @@ class Calculator:
         else:
             if b == 0:
                 raise ValueError("Cannot divide by zero")
+            self._save_to_history(f"divide({a}, {b}) = {a/b}")
             return a / b
 
     def power(self, a, b):
