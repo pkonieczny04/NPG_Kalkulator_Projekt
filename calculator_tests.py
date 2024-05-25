@@ -21,3 +21,13 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(self.calc.multiply(4, 6), 24)
         self.assertEqual(self.calc.multiply(-3, 2), -6)
         self.assertEqual(self.calc.multiply(-5, -2), 10)
+
+    def test_power(self):
+        self.assertEqual(self.calc.power(2, 3), 8)      # 2 ** 3 = 8
+        self.assertEqual(self.calc.power(4, 0.5), 2)    # 4 ** 0.5 = 2 (pierwiastek kwadratowy)
+        self.assertEqual(self.calc.power(4, 2), 16)
+    
+    def test_sqrt(self):
+        self.assertEqual(self.calc.sqrt(25), 5)         # sqrt(25) = 5
+        with self.assertRaises(ValueError):
+            self.calc.sqrt(-1)  # Nie można obliczyć pierwiastka z liczby ujemnej
