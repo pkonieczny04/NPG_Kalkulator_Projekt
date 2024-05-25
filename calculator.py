@@ -32,6 +32,7 @@ class Calculator:
     def subtract(self, a, b):
         if isinstance(a, Complex) and isinstance(b, Complex):
             self._save_to_history(f"{a}, {b} = {a-b}")
+
             return a.subtract(b)
         else:
             self._save_to_history(f"{a}, {b} = {a-b}")
@@ -56,10 +57,14 @@ class Calculator:
             return a / b
 
     def power(self, a, b):
-        pass
+        result = a ** b
+        return result
 
     def sqrt(self, a):
-        pass  
+        if a < 0:
+            raise ValueError("Cannot take the square root of a negative number")
+        result = a ** 0.5
+        return result  
 
     
 class Complex:
