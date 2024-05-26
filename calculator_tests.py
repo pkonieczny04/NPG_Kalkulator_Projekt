@@ -75,7 +75,14 @@ class TestCalculatorComplex(unittest.TestCase):
 class TestCalculatorHistory(unittest.TestCase):
     def setUp(self):
         self.calc = Calculator()
-    
+
+    def test_addition_to_history(self):
+        a = 2
+        b = 3
+        result = self.calc.add(a, b)
+        self.assertEqual(len(self.history), 1)
+        self.assertEqual(self.get_history, "2 + 3 = 5")
+        self.clear_history
 
 if __name__ == '__main__':
     unittest.main()
