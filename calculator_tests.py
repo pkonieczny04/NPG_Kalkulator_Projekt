@@ -92,6 +92,13 @@ class TestCalculatorHistory(unittest.TestCase):
         self.assertEqual(self.get_history, "5 - 3 = 2")
         self.clear_history
 
+    def test_multiply_to_history(self):
+        a = 5
+        b = 6
+        result = self.calc.multiply(a, b)
+        self.assertEqual(len(self.history), 1)
+        self.assertEqual(self.get_history, "5 * 6 = 30")
+        self.clear_history
     
 if __name__ == '__main__':
     unittest.main()
