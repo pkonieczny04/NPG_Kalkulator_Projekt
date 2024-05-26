@@ -99,6 +99,14 @@ class TestCalculatorHistory(unittest.TestCase):
         self.assertEqual(len(self.history), 1)
         self.assertEqual(self.get_history, "5 * 6 = 30")
         self.clear_history
+
+    def test_divide_to_history(self):
+        a = 10
+        b = 2
+        result = self.calc.divide(a, b)
+        self.assertEqual(len(self.history), 1)
+        self.assertEqual(self.get_history, "10 / 2 = 5")
+        self.clear_history
     
 if __name__ == '__main__':
     unittest.main()
