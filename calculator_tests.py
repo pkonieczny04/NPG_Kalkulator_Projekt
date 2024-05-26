@@ -84,6 +84,15 @@ class TestCalculatorHistory(unittest.TestCase):
         self.assertEqual(self.get_history, "2 + 3 = 5")
         self.clear_history
 
+    def test_subtract_to_history(self):
+        a = 5
+        b = 3
+        result = self.calc.subtract(a, b)
+        self.assertEqual(len(self.history), 1)
+        self.assertEqual(self.get_history, "5 - 3 = 2")
+        self.clear_history
+
+    
 if __name__ == '__main__':
     unittest.main()
 
