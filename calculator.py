@@ -19,7 +19,7 @@ class Calculator:
             print(i)
 
     def clear_history(self):
-        self.history=[]
+        self.history.clear()
          
     def add(self, a, b):
         if isinstance(a, Complex) and isinstance(b, Complex):
