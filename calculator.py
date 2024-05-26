@@ -9,9 +9,9 @@ class Calculator:
     def _save_to_history(self, operation):
         if len(self.history) < 10:
             self.history.append(operation)
-        else
-            self.history.insert(0, operation)
-            self.history.pop()
+        else:
+            self.history.pop(0)
+            self.history.append(operation)
             
 
     def get_history(self):
@@ -19,37 +19,40 @@ class Calculator:
             print(i)
 
     def clear_history(self):
-        self.history=[]
+        self.history.clear()
          
     def add(self, a, b):
         if isinstance(a, Complex) and isinstance(b, Complex):
-            self._save_to_history(f"{a} +{b} = {a+b}")
-            return a.add(b)
+            result = a.add(b)
+            self._save_to_history(f"({a.real} + {a.im}i) + ({b.real} + {b.im}i) = ({result.real} + {result.im}i)")
+            return result
         else:
-            self._save_to_history(f"{a} +{b} = {a+b}")
+            self._save_to_history(f"{a} + {b} = {a+b}")
             return a + b
 
     def subtract(self, a, b):
         if isinstance(a, Complex) and isinstance(b, Complex):
-            self._save_to_history(f"{a}, {b} = {a-b}")
-
-            return a.subtract(b)
+            result = a.subtract(b)
+            self._save_to_history(f"({a.real} + {a.im}i) - ({b.real} + {b.im}i) = ({result.real} + {result.im}i)")
+            return result
         else:
-            self._save_to_history(f"{a}, {b} = {a-b}")
+            self._save_to_history(f"{a} - {b} = {a-b}")
             return a - b
 
     def multiply(self, a, b):
         if isinstance(a, Complex) and isinstance(b, Complex):
-            self._save_to_history(f"{a} * {b} = {a*b}")
-            return a.multiply(b)
+            result = a.multiply(b)
+            self._save_to_history(f"({a.real} + {a.im}i) * ({b.real} + {b.im}i) = ({result.real} + {result.im}i)")
+            return result
         else:
             self._save_to_history(f"{a} * {b} = {a*b}")
             return a * b
 
     def divide(self, a, b):
         if isinstance(a, Complex) and isinstance(b, Complex):
-            self._save_to_history(f"{a} / {b} = {a/b}")
-            return a.divide(b)
+            result = a.divide(b)
+            self._save_to_history(f"({a.real} + {a.im}i) / ({b.real} + {b.im}i) = ({result.real} + {result.im}i)")
+            return result
         else:
             if b == 0:
                 raise ValueError("Cannot divide by zero")
@@ -58,12 +61,14 @@ class Calculator:
 
     def power(self, a, b):
         result = a ** b
+        self._save_to_history(f"{a} ^ {b} = {result}")
         return result
 
     def sqrt(self, a):
         if a < 0:
             raise ValueError("Cannot take the square root of a negative number")
         result = a ** 0.5
+        self._save_to_history(f"sqrt({a}) = {result}")
         return result  
 
     

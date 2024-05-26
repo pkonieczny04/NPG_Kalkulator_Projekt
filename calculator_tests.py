@@ -11,7 +11,6 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(self.calc.add(2, 3), 5)  # 2 + 3 = 5
         self.assertEqual(self.calc.add(-1, 5), 4) # -1 + 5 = 4
     
-    
     def test_subtract(self):
         self.assertEqual(self.calc.subtract(5, 3), 2)  # 5 - 3 = 2
         self.assertEqual(self.calc.subtract(10, 7), 3) # 10 - 7 = 3
@@ -22,9 +21,20 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(self.calc.multiply(-3, 2), -6)
         self.assertEqual(self.calc.multiply(-5, -2), 10)
 
+    def test_divide(self):
+        self.assertAlmostEqual(self.calc.divide(6, 6), 1.0)
+        self.assertAlmostEqual(self.calc.divide(-3, 1), -3.0)
+        self.assertAlmostEqual(self.calc.divide(-5, -2), 2.5)
+
+    def test_divide_by_zero(self):
+        a = 1
+        b = 0
+        with self.assertRaises(ValueError):
+            self.calc.divide(a, b)
+
 
     def test_power(self):
-        self.assertEqual(self.calc.power(2, 3), 8)      # 2 ** 3 = 8
+        self.assertAEqual(self.calc.power(2, 3), 8)      # 2 ** 3 = 8
         self.assertEqual(self.calc.power(4, 0.5), 2)    # 4 ** 0.5 = 2 (pierwiastek kwadratowy)
         self.assertEqual(self.calc.power(4, 2), 16)
     
@@ -71,6 +81,96 @@ class TestCalculatorComplex(unittest.TestCase):
         b = Complex(0, 0)
         with self.assertRaises(ValueError):
             self.calc.divide(a, b)
+
+class TestCalculatorHistory(unittest.TestCase):
+    def setUp(self):
+        self.calc = Calculator()
+
+    def test_addition_to_history(self):
+        a = 2
+        b = 3
+        result = self.calc.add(a, b)
+        self.assertEqual(len(self.calc.history), 1)
+        self.assertEqual(self.calc.history[0], "2 + 3 = 5")
+        self.calc.clear_history
+
+    def test_subtract_to_history(self):
+        a = 5
+        b = 3
+        result = self.calc.subtract(a, b)
+        self.assertEqual(len(self.calc.history), 1)
+        self.assertEqual(self.calc.history[0], "5 - 3 = 2")
+        self.calc.clear_history
+
+    def test_multiply_to_history(self):
+        a = 5
+        b = 6
+        result = self.calc.multiply(a, b)
+        self.assertEqual(len(self.calc.history), 1)
+        self.assertEqual(self.calc.history[0], "5 * 6 = 30")
+        self.calc.clear_history
+
+    def test_divide_to_history(self):
+        a = 10
+        b = 2
+        result = self.calc.divide(a, b)
+        self.assertEqual(len(self.calc.history), 1)
+        self.assertEqual(self.calc.history[0], "10 / 2 = 5.0")
+        self.calc.clear_history
+
+    def test_power_to_history(self):
+        a = 2
+        b = 10
+        result = self.calc.power(a, b)
+        self.assertEqual(len(self.calc.history), 1)
+        self.assertEqual(self.calc.history[0], "2 ^ 10 = 1024")
+        self.calc.clear_history
+
+    def test_sqrt_to_history(self):
+        a = 16
+        result = self.calc.sqrt(a)
+        self.assertEqual(len(self.calc.history), 1)
+        self.assertEqual(self.calc.history[0], "sqrt(16) = 4.0")
+        self.calc.clear_history
+
+    def test_add_complex_to_history(self):
+            a = Complex(1, 2)
+            b = Complex(3, 4)
+            result = self.calc.add(a, b)
+            self.assertEqual(len(self.calc.history), 1)
+            self.assertEqual(self.calc.history[0], "(1 + 2i) + (3 + 4i) = (4 + 6i)")
+            self.calc.clear_history
+
+    def test_subtract_complex_to_history(self):
+            a = Complex(5, 3)
+            b = Complex(2, 1)
+            result = self.calc.subtract(a, b)
+            self.assertEqual(len(self.calc.history), 1)
+            self.assertEqual(self.calc.history[0], "(5 + 3i) - (2 + 1i) = (3 + 2i)")
+            self.calc.clear_history
+
+    def test_multiply_complex_to_history(self):
+            a = Complex(2, 3)
+            b = Complex(4, 5)
+            result = self.calc.multiply(a, b)
+            self.assertEqual(len(self.calc.history), 1)
+            self.assertEqual(self.calc.history[0], "(2 + 3i) * (4 + 5i) = (-7 + 22i)")
+            self.calc.clear_history
+
+    def test_divide_complex_to_history(self):
+            a = Complex(1, 8)
+            b = Complex(2, 3)
+            result = self.calc.divide(a, b)
+            self.assertEqual(len(self.calc.history), 1)
+            self.assertEqual(self.calc.history[0], "(1 + 8i) / (2 + 3i) = (2.0 + 1.0i)")
+            self.calc.clear_history
+
+    def test_history_max_10_elements(self):
+        for i in range (0, 15):
+            result = self.calc.add(1, 1)
+        self.assertEqual(len(self.calc.history), 10)
+        self.calc.clear_history
+    
 
 if __name__ == '__main__':
     unittest.main()
