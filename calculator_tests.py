@@ -155,18 +155,18 @@ class TestCalculatorHistory(unittest.TestCase):
             self.assertEqual(self.get_history, "(1 + 8i) / (2 + 3i) = (2 + 1i)")
             self.clear_history
 
-    def test_history_max_10_elements(self):
-        for i in range (0, 15):
-            result = self.calc.add(1, 1)
-        self.assertEqual(len(self.history, 10)
-        self.clear_history
-
     def test_history_clearing(self):
         result = self.calc.add(1, 1)
         self.assertEqual(len(self.history), 1)
         self.clear_history
         self.assertEqual(len(self.history), None)
-        
+
+    def test_history_max_10_elements(self):
+        for i in range (0, 15):
+            result = self.calc.add(1, 1)
+        self.assertEqual(len(self.history, 10)
+        self.clear_history
+    
 
 if __name__ == '__main__':
     unittest.main()
