@@ -116,6 +116,12 @@ class TestCalculatorHistory(unittest.TestCase):
         self.assertEqual(self.get_history, "2 ^ 10 = 1024")
         self.clear_history
 
+    def test_sqrt_to_history(self):
+        a = 16
+        result = self.calc.sqrt(a)
+        self.assertEqual(len(self.history), 1)
+        self.assertEqual(self.get_history, "sqrt(a) = 4")
+        self.clear_history
 
 if __name__ == '__main__':
     unittest.main()
