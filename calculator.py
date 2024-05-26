@@ -65,6 +65,7 @@ class Calculator:
         if a < 0:
             raise ValueError("Cannot take the square root of a negative number")
         result = a ** 0.5
+        self._save_to_history(f"sqrt({a}) = {result}")
         return result  
 
     
