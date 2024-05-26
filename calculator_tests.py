@@ -131,6 +131,14 @@ class TestCalculatorHistory(unittest.TestCase):
             self.assertEqual(self.get_history, "(1 + 2i) + (3 + 4i) = (4 + 6i)")
             self.clear_history
 
+    def test_subtract_complex_to_history(self):
+            a = Complex(5, 3)
+            b = Complex(2, 1)
+            result = self.calc.subtract(a, b)
+            self.assertEqual(len(self.history), 1)
+            self.assertEqual(self.get_history, "(5 + 3i) - (2 + 1i) = (3 + 2i)")
+            self.clear_history
+
 if __name__ == '__main__':
     unittest.main()
 
