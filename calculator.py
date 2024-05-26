@@ -58,6 +58,7 @@ class Calculator:
 
     def power(self, a, b):
         result = a ** b
+        self._save_to_history(f"{a} ^ {b} = {result}")
         return result
 
     def sqrt(self, a):
