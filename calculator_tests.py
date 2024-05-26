@@ -139,6 +139,14 @@ class TestCalculatorHistory(unittest.TestCase):
             self.assertEqual(self.get_history, "(5 + 3i) - (2 + 1i) = (3 + 2i)")
             self.clear_history
 
+    def test_multiply_complex_to_history(self):
+            a = Complex(2, 3)
+            b = Complex(4, 5)
+            result = self.calc.multiply(a, b)
+            self.assertEqual(len(self.history), 1)
+            self.assertEqual(self.get_history, "(2 + 3i) * (4 + 5i) = (-7 + 22i)")
+            self.clear_history
+
 if __name__ == '__main__':
     unittest.main()
 
