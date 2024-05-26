@@ -9,7 +9,7 @@ class Calculator:
     def _save_to_history(self, operation):
         if len(self.history) < 10:
             self.history.append(operation)
-        else
+        else:
             self.history.pop(0)
             self.history.append(operation)
             
@@ -24,7 +24,7 @@ class Calculator:
     def add(self, a, b):
         if isinstance(a, Complex) and isinstance(b, Complex):
             result = a.add(b)
-            self._save_to_history(f"({a.real} + {a.im}i) + ({b.real} + {b.im}i) = ({result.real) + {result.im}i")
+            self._save_to_history(f"({a.real} + {a.im}i) + ({b.real} + {b.im}i) = ({result.real}) + {result.im}i")
             return result
         else:
             self._save_to_history(f"{a} + {b} = {a+b}")
@@ -33,7 +33,7 @@ class Calculator:
     def subtract(self, a, b):
         if isinstance(a, Complex) and isinstance(b, Complex):
             result = a.subtract(b)
-            self._save_to_history(f"({a.real} + {a.im}i) - ({b.real} + {b.im}i) = ({result.real) + {result.im}i")
+            self._save_to_history(f"({a.real} + {a.im}i) - ({b.real} + {b.im}i) = ({result.real}) + {result.im}i")
             return result
         else:
             self._save_to_history(f"{a}, {b} = {a-b}")
@@ -42,7 +42,7 @@ class Calculator:
     def multiply(self, a, b):
         if isinstance(a, Complex) and isinstance(b, Complex):
             result = a.multiply(b)
-            self._save_to_history(f"({a.real} + {a.im}i) * ({b.real} + {b.im}i) = ({result.real) + {result.im}i")
+            self._save_to_history(f"({a.real} + {a.im}i) * ({b.real} + {b.im}i) = ({result.real}) + {result.im}i")
             return result
         else:
             self._save_to_history(f"{a} * {b} = {a*b}")
@@ -51,7 +51,7 @@ class Calculator:
     def divide(self, a, b):
         if isinstance(a, Complex) and isinstance(b, Complex):
             result = a.divide(b)
-            self._save_to_history(f"({a.real} + {a.im}i) / ({b.real} + {b.im}i) = ({result.real) + {result.im}i")
+            self._save_to_history(f"({a.real} + {a.im}i) / ({b.real} + {b.im}i) = ({result.real}) + {result.im}i")
             return result
         else:
             if b == 0:
