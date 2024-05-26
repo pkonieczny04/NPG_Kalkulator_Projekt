@@ -10,8 +10,8 @@ class Calculator:
         if len(self.history) < 10:
             self.history.append(operation)
         else
-            self.history.insert(0, operation)
-            self.history.pop()
+            self.history.pop(0)
+            self.history.append(operation)
             
 
     def get_history(self):
