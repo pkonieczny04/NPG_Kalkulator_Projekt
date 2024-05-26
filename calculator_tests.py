@@ -123,6 +123,14 @@ class TestCalculatorHistory(unittest.TestCase):
         self.assertEqual(self.get_history, "sqrt(a) = 4")
         self.clear_history
 
+    def test_add_complex_to_history(self):
+            a = Complex(1, 2)
+            b = Complex(3, 4)
+            result = self.calc.add(a, b)
+            self.assertEqual(len(self.history), 1)
+            self.assertEqual(self.get_history, "(1 + 2i) + (3 + 4i) = (4 + 6i)")
+            self.clear_history
+
 if __name__ == '__main__':
     unittest.main()
 
