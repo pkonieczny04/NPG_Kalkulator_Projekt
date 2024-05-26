@@ -161,6 +161,11 @@ class TestCalculatorHistory(unittest.TestCase):
         self.assertEqual(len(self.history, 10)
         self.clear_history
 
+    def test_history_clearing(self):
+        result = self.calc.add(1, 1)
+        self.assertEqual(len(self.history), 1)
+        self.clear_history
+        self.assertEqual(len(self.history), None)
         
 
 if __name__ == '__main__':
