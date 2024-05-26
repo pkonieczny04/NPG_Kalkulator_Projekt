@@ -11,7 +11,6 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(self.calc.add(2, 3), 5)  # 2 + 3 = 5
         self.assertEqual(self.calc.add(-1, 5), 4) # -1 + 5 = 4
     
-    
     def test_subtract(self):
         self.assertEqual(self.calc.subtract(5, 3), 2)  # 5 - 3 = 2
         self.assertEqual(self.calc.subtract(10, 7), 3) # 10 - 7 = 3
@@ -22,9 +21,20 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(self.calc.multiply(-3, 2), -6)
         self.assertEqual(self.calc.multiply(-5, -2), 10)
 
+    def test_divide(self):
+        self.assertAlmostEqual(self.calc.divide(6, 6), 1.0)
+        self.assertAlmostEqual(self.calc.divide(-3, 1), -3.0)
+        self.assertAlmostEqual(self.calc.divide(-5, -2), 2.5)
+
+    def test_divide_by_zero(self):
+        a = 1
+        b = 0
+        with self.assertRaises(ValueError):
+            self.calc.divide(a, b)
+
 
     def test_power(self):
-        self.assertEqual(self.calc.power(2, 3), 8)      # 2 ** 3 = 8
+        self.assertAEqual(self.calc.power(2, 3), 8)      # 2 ** 3 = 8
         self.assertEqual(self.calc.power(4, 0.5), 2)    # 4 ** 0.5 = 2 (pierwiastek kwadratowy)
         self.assertEqual(self.calc.power(4, 2), 16)
     
