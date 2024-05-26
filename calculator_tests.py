@@ -72,6 +72,11 @@ class TestCalculatorComplex(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.calc.divide(a, b)
 
+class TestCalculatorHistory(unittest.TestCase):
+    def setUp(self):
+        self.calc = Calculator()
+    
+
 if __name__ == '__main__':
     unittest.main()
 
