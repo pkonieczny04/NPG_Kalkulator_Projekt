@@ -92,7 +92,7 @@ class TestCalculatorHistory(unittest.TestCase):
         result = self.calc.add(a, b)
         self.assertEqual(len(self.calc.history), 1)
         self.assertEqual(self.calc.history[0], "2 + 3 = 5")
-        self.calc.clear_history
+        self.calc.clear_history()
 
     def test_subtract_to_history(self):
         a = 5
@@ -100,7 +100,7 @@ class TestCalculatorHistory(unittest.TestCase):
         result = self.calc.subtract(a, b)
         self.assertEqual(len(self.calc.history), 1)
         self.assertEqual(self.calc.history[0], "5 - 3 = 2")
-        self.calc.clear_history
+        self.calc.clear_history()
 
     def test_multiply_to_history(self):
         a = 5
@@ -108,7 +108,7 @@ class TestCalculatorHistory(unittest.TestCase):
         result = self.calc.multiply(a, b)
         self.assertEqual(len(self.calc.history), 1)
         self.assertEqual(self.calc.history[0], "5 * 6 = 30")
-        self.calc.clear_history
+        self.calc.clear_history()
 
     def test_divide_to_history(self):
         a = 10
@@ -116,7 +116,7 @@ class TestCalculatorHistory(unittest.TestCase):
         result = self.calc.divide(a, b)
         self.assertEqual(len(self.calc.history), 1)
         self.assertEqual(self.calc.history[0], "10 / 2 = 5.0")
-        self.calc.clear_history
+        self.calc.clear_history()
 
     def test_power_to_history(self):
         a = 2
@@ -124,14 +124,14 @@ class TestCalculatorHistory(unittest.TestCase):
         result = self.calc.power(a, b)
         self.assertEqual(len(self.calc.history), 1)
         self.assertEqual(self.calc.history[0], "2 ^ 10 = 1024")
-        self.calc.clear_history
+        self.calc.clear_history()
 
     def test_sqrt_to_history(self):
         a = 16
         result = self.calc.sqrt(a)
         self.assertEqual(len(self.calc.history), 1)
         self.assertEqual(self.calc.history[0], "sqrt(16) = 4.0")
-        self.calc.clear_history
+        self.calc.clear_history()
 
     def test_add_complex_to_history(self):
             a = Complex(1, 2)
@@ -139,7 +139,7 @@ class TestCalculatorHistory(unittest.TestCase):
             result = self.calc.add(a, b)
             self.assertEqual(len(self.calc.history), 1)
             self.assertEqual(self.calc.history[0], "(1 + 2i) + (3 + 4i) = (4 + 6i)")
-            self.calc.clear_history
+            self.calc.clear_history()
 
     def test_subtract_complex_to_history(self):
             a = Complex(5, 3)
@@ -147,7 +147,7 @@ class TestCalculatorHistory(unittest.TestCase):
             result = self.calc.subtract(a, b)
             self.assertEqual(len(self.calc.history), 1)
             self.assertEqual(self.calc.history[0], "(5 + 3i) - (2 + 1i) = (3 + 2i)")
-            self.calc.clear_history
+            self.calc.clear_history()
 
     def test_multiply_complex_to_history(self):
             a = Complex(2, 3)
@@ -155,7 +155,7 @@ class TestCalculatorHistory(unittest.TestCase):
             result = self.calc.multiply(a, b)
             self.assertEqual(len(self.calc.history), 1)
             self.assertEqual(self.calc.history[0], "(2 + 3i) * (4 + 5i) = (-7 + 22i)")
-            self.calc.clear_history
+            self.calc.clear_history()
 
     def test_divide_complex_to_history(self):
             a = Complex(1, 8)
@@ -163,13 +163,20 @@ class TestCalculatorHistory(unittest.TestCase):
             result = self.calc.divide(a, b)
             self.assertEqual(len(self.calc.history), 1)
             self.assertEqual(self.calc.history[0], "(1 + 8i) / (2 + 3i) = (2.0 + 1.0i)")
-            self.calc.clear_history
+            self.calc.clear_history()
+
+    def test_history_clearing(self):
+        result = self.calc.add(1, 1)
+        self.assertEqual(len(self.calc.history), 1)
+        self.calc.clear_history()
+        self.assertEqual(len(self.calc.history), None)
+        
 
     def test_history_max_10_elements(self):
         for i in range (0, 15):
             result = self.calc.add(1, 1)
         self.assertEqual(len(self.calc.history), 10)
-        self.calc.clear_history
+        self.calc.clear_history()
     
 
 if __name__ == '__main__':
