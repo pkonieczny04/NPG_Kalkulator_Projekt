@@ -75,6 +75,11 @@ class Calculator:
         expression = expression.replace(' ', '')
         tokens = re.findall(r'\d+\.?\d*|\+|\-|\*|\/|\^|\(|\)|i', expression)
 
+        values = []
+        operators = []
+
+        pass
+
 class Complex:
     def __init__(self, real, im):
         self.real = real
