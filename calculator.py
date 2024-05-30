@@ -71,7 +71,10 @@ class Calculator:
         self._save_to_history(f"sqrt({a}) = {result}")
         return result  
 
-    
+    def evaluate_expression(self, expression):
+        expression = expression.replace(' ', '')
+        pass
+
 class Complex:
     def __init__(self, real, im):
         self.real = real
