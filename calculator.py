@@ -1,5 +1,5 @@
 #Plik nagłówkowy
-import math
+import math, re
 
 class Calculator:
 
@@ -73,7 +73,7 @@ class Calculator:
 
     def evaluate_expression(self, expression):
         expression = expression.replace(' ', '')
-        pass
+        tokens = re.findall(r'\d+\.?\d*|\+|\-|\*|\/|\^|\(|\)|i', expression)
 
 class Complex:
     def __init__(self, real, im):
