@@ -13,4 +13,8 @@ Przetwarzanie tokenów (napisac w module calculator):
 
 Kuba:
 stworzenie testów jednostkowych prostych (czyli sprawdzenie wszystkich funkcjonalnosci od dodawania aż pierwiastkowanie i łączne czyli np 2 * 3 + 2 itd)
-	Deadline: 31.05.2024
+	Deadline: 2.06.2024
+
+Dominik:
+napisanie testow jednostkowych dla wyrazen nieprawidlowych
+usunięcie branchy z poprzednich sprintow
