@@ -15,7 +15,7 @@ class TestCalculatorEvaluateExpression(unittest.TestCase):
     result = self.calc.evaluate_expression("(5 + 6i) / (1 + 2i)")
     self.assertAlmostEqual(result.real, 4.4, places=1)
     self.assertAlmostEqual(result.im, -0.8, places=1)
-	  self.assertEqual(self.calc.evaluate_expression("(1 + 2i) + (3 + 4i)").real, 4)
+    self.assertEqual(self.calc.evaluate_expression("(1 + 2i) + (3 + 4i)").real, 4)
     self.assertEqual(self.calc.evaluate_expression("(1 + 2i) + (3 + 4i)").im, 6)
         
     self.assertEqual(self.calc.evaluate_expression("(5 + 6i) - (1 + 2i)").real, 4)
@@ -33,10 +33,11 @@ class TestCalculatorEvaluateExpression(unittest.TestCase):
     self.assertAlmostEqual(result.real, -4, places=1)
     self.assertAlmostEqual(result.im, 24, places=1)
    
-  
   def test_evaluate_expression_invalid(self):
-    pass
-  
+     with self.assertRaises(ValueError):	
+     	self.calc.evaluate_expression("2 / 0")
+     with self.assertRaises(ValueError):
+	self.calc.evaluate_expression("sqrt(-1)")
   
   
 if __name__ == '__main__':
