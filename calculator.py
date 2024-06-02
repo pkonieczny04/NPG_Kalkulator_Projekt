@@ -103,7 +103,17 @@ class Calculator:
                     values.append(a / b)
                 elif op == '^':
                     values.append(a ** b)
+        def precedence(op):
+            if op in ('+', '-'):
+                return 1
+            if op in ('*', '/'):
+                return 2
+            if op == '^':
+                return 3
+            return 0
+        
         pass
+    
 
 class Complex:
     def __init__(self, real, im):
