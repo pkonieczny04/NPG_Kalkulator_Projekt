@@ -6,7 +6,10 @@ class TestCalculatorEvaluateExpression(unittest.TestCase):
         self.assertEqual(self.calc.evaluate_expression("2 ^ 3"), 8)
 
   def test_evaluate_expression_complex(self):
-    pass
+        self.assertEqual(self.calc.evaluate_expression("2 + 3 * 4"), 14)
+        self.assertEqual(self.calc.evaluate_expression("(2 + 3) * 4"), 20)
+        self.assertEqual(self.calc.evaluate_expression("4 * (3 + 2)"), 20)
+        self.assertEqual(self.calc.evaluate_expression("2 + (3 * 4) ^ 2"), 146)
 
   def test_evaluate_expression_with_complex_numbers(self):
     pass
