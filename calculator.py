@@ -78,6 +78,31 @@ class Calculator:
         values = []
         operators = []
 
+        def apply_operator(op):
+            b = values.pop()
+            a = values.pop()
+            if isinstance(a, Complex) or isinstance(b, Complex):
+                if op == '+':
+                    values.append(self.add(a, b))
+                elif op == '-':
+                    values.append(self.subtract(a, b))
+                elif op == '*':
+                    values.append(self.multiply(a, b))
+                elif op == '/':
+                    values.append(self.divide(a, b))
+                elif op == '^':
+                    values.append(self.power(a, b))
+            else:
+                if op == '+':
+                    values.append(a + b)
+                elif op == '-':
+                    values.append(a - b)
+                elif op == '*':
+                    values.append(a * b)
+                elif op == '/':
+                    values.append(a / b)
+                elif op == '^':
+                    values.append(a ** b)
         pass
 
 class Complex:
