@@ -1,6 +1,9 @@
 class TestCalculatorEvaluateExpression(unittest.TestCase):
   def test_evaluate_expression_simple(self):
-    pass
+        self.assertEqual(self.calc.evaluate_expression("2 + 3"), 5)
+        self.assertEqual(self.calc.evaluate_expression("4 * 5"), 20)
+        self.assertEqual(self.calc.evaluate_expression("6 / 2"), 3.0)
+        self.assertEqual(self.calc.evaluate_expression("2 ^ 3"), 8)
 
   def test_evaluate_expression_complex(self):
     pass
