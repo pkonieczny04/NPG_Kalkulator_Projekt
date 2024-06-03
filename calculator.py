@@ -88,7 +88,7 @@ class Calculator:
             if isinstance(a, Complex) or isinstance(b, Complex):
                 if not isinstance(a, Complex):
                     a = Complex(a, 0)
-                elif not isinstance(b, Complex):
+                if not isinstance(b, Complex):
                     b = Complex(b, 0)
                 elif op == '+':
                     values.append(self.add(a, b))
