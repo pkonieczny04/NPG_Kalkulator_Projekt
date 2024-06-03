@@ -169,7 +169,7 @@ class TestCalculatorHistory(unittest.TestCase):
         result = self.calc.add(1, 1)
         self.assertEqual(len(self.calc.history), 1)
         self.calc.clear_history()
-        self.assertEqual(len(self.calc.history), None)
+        self.assertEqual(len(self.calc.history), 0)
         
 
     def test_history_max_10_elements(self):
@@ -181,7 +181,7 @@ class TestCalculatorHistory(unittest.TestCase):
 class TestCalculatorEvaluateExpression(unittest.TestCase):
   def setUp(self):
         self.calc = Calculator()
-        
+
   def test_evaluate_expression_simple(self):
     self.assertEqual(self.calc.evaluate_expression("2 + 3"), 5)
     self.assertEqual(self.calc.evaluate_expression("4 * 5"), 20)
