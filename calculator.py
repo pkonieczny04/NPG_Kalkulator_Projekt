@@ -89,6 +89,8 @@ class Calculator:
                 elif op == '*':
                     values.append(self.multiply(a, b))
                 elif op == '/':
+                    if b == 0:
+                        raise ValueError("Cannot divide by zero")
                     values.append(self.divide(a, b))
                 elif op == '^':
                     values.append(self.power(a, b))
