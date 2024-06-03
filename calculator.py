@@ -79,10 +79,20 @@ class Calculator:
         operators = []
 
         def apply_operator(op):
+            try:
+                b = values.pop()
+                a = values.pop()
+            except IndexError:
+                raise ValueError("Invalid expression")
+            
             b = values.pop()
             a = values.pop()
             if isinstance(a, Complex) or isinstance(b, Complex):
-                if op == '+':
+                if not isinstance(a, Complex):
+                    a = Complex(a, 0)
+                elif not isinstance(b, Complex):
+                    b = Complex(b, 0)
+                elif op == '+':
                     values.append(self.add(a, b))
                 elif op == '-':
                     values.append(self.subtract(a, b))
