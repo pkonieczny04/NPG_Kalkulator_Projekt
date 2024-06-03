@@ -79,6 +79,12 @@ class Calculator:
         operators = []
 
         def apply_operator(op):
+            try:
+                b = values.pop()
+                a = values.pop()
+            except IndexError:
+                raise ValueError("Invalid expression")
+            
             b = values.pop()
             a = values.pop()
             if isinstance(a, Complex) or isinstance(b, Complex):
