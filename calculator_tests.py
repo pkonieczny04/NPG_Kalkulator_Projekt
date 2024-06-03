@@ -196,7 +196,7 @@ class TestCalculatorEvaluateExpression(unittest.TestCase):
 
   def test_evaluate_expression_with_complex_numbers(self):
     result = self.calc.evaluate_expression("(5 + 6i) / (1 + 2i)")
-    self.assertAlmostEqual(result.real, 4.4, places=1)
+    self.assertAlmostEqual(result.real, 3.4, places=1)
     self.assertAlmostEqual(result.im, -0.8, places=1)
     self.assertEqual(self.calc.evaluate_expression("(1 + 2i) + (3 + 4i)").real, 4)
     self.assertEqual(self.calc.evaluate_expression("(1 + 2i) + (3 + 4i)").im, 6)
@@ -210,11 +210,11 @@ class TestCalculatorEvaluateExpression(unittest.TestCase):
   def test_evaluate_expression_with_nested_complex_operations(self):
     result = self.calc.evaluate_expression("((1 + 1i) + (2 + 2i)) * (3 + 3i)")
     self.assertAlmostEqual(result.real, 0, places=1)
-    self.assertAlmostEqual(result.im, 12, places=1)
+    self.assertAlmostEqual(result.im, 18, places=1)
 
     result = self.calc.evaluate_expression("((2 + 3i) - (1 + 1i)) * (4 + 4i)")
     self.assertAlmostEqual(result.real, -4, places=1)
-    self.assertAlmostEqual(result.im, 24, places=1)
+    self.assertAlmostEqual(result.im, 12, places=1)
    
   def test_evaluate_expression_invalid(self):
      with self.assertRaises(ValueError):
