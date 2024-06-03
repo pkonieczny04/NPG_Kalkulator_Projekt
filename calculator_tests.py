@@ -169,7 +169,7 @@ class TestCalculatorHistory(unittest.TestCase):
         result = self.calc.add(1, 1)
         self.assertEqual(len(self.calc.history), 1)
         self.calc.clear_history()
-        self.assertEqual(len(self.calc.history), None)
+        self.assertEqual(len(self.calc.history), 0)
         
 
     def test_history_max_10_elements(self):
