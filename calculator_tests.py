@@ -34,7 +34,7 @@ class TestCalculator(unittest.TestCase):
 
 
     def test_power(self):
-        self.assertAEqual(self.calc.power(2, 3), 8)      # 2 ** 3 = 8
+        self.assertEqual(self.calc.power(2, 3), 8)      # 2 ** 3 = 8
         self.assertEqual(self.calc.power(4, 0.5), 2)    # 4 ** 0.5 = 2 (pierwiastek kwadratowy)
         self.assertEqual(self.calc.power(4, 2), 16)
     
@@ -179,6 +179,7 @@ class TestCalculatorHistory(unittest.TestCase):
         self.calc.clear_history()
 
 class TestCalculatorEvaluateExpression(unittest.TestCase):
+  
   def test_evaluate_expression_simple(self):
     self.assertEqual(self.calc.evaluate_expression("2 + 3"), 5)
     self.assertEqual(self.calc.evaluate_expression("4 * 5"), 20)
