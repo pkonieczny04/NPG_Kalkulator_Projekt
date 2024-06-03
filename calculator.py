@@ -1,5 +1,5 @@
 #Plik nagłówkowy
-import math
+import math, re
 
 class Calculator:
 
@@ -70,6 +70,92 @@ class Calculator:
         result = a ** 0.5
         self._save_to_history(f"sqrt({a}) = {result}")
         return result  
+
+    def evaluate_expression(self, expression):
+        expression = expression.replace(' ', '')
+        tokens = re.findall(r'\d+\.?\d*|\+|\-|\*|\/|\^|\(|\)|i', expression)
+
+        values = []
+        operators = []
+
+        def apply_operator(op):
+            if len(values) < 2: 
+                raise ValueError("Invalid expression")
+            
+            b = values.pop()
+            a = values.pop()
+        
+            if isinstance(a, Complex) or isinstance(b, Complex):
+                if not isinstance(a, Complex):
+                    a = Complex(a, 0)
+                if not isinstance(b, Complex):
+                    b = Complex(b, 0)
+                elif op == '+':
+                    values.append(self.add(a, b))
+                elif op == '-':
+                    values.append(self.subtract(a, b))
+                elif op == '*':
+                    values.append(self.multiply(a, b))
+                elif op == '/':
+                    if b.real == 0 and b.im == 0:
+                        raise ValueError("Cannot divide by zero")
+                    values.append(self.divide(a, b))
+                elif op == '^':
+                    values.append(self.power(a, b))
+            else:
+                if op == '+':
+                    values.append(a + b)
+                elif op == '-':
+                    values.append(a - b)
+                elif op == '*':
+                    values.append(a * b)
+                elif op == '/':
+                    if b == 0:
+                        raise ValueError("Cannot divide by zero")
+                    values.append(a / b)
+                elif op == '^':
+                    values.append(a ** b)
+        def precedence(op):
+            if op in ('+', '-'):
+                return 1
+            if op in ('*', '/'):
+                return 2
+            if op == '^':
+                return 3
+            return 0
+        i = 0
+        while i < len(tokens):
+            token = tokens[i]
+
+            if re.match(r'\d+\.?\d*', token):
+                if i + 1 < len(tokens) and tokens[i + 1] == 'i':
+                    values.append(Complex(0, float(token)))
+                    i += 1
+                else:
+                    values.append(float(token))
+            elif token == '(':
+                operators.append(token)
+            elif token == ')':
+                while operators and operators[-1] != '(':
+                    apply_operator(operators.pop())
+                operators.pop()
+            else:
+                while (operators and precedence(operators[-1]) >= precedence(token)):
+                    apply_operator(operators.pop())
+                operators.append(token)
+            i += 1
+
+        while operators:
+            apply_operator(operators.pop())
+
+        return values[0]
+        
+        if isinstance(result, Complex):
+            self._save_to_history(f"{expression} = {result.real} + {result.im}i")
+        else:
+            self._save_to_history(f"{expression} = {result}")
+
+        return result
 
     
 class Complex:
