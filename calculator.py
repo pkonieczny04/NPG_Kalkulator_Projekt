@@ -84,9 +84,7 @@ class Calculator:
                 a = values.pop()
             except IndexError:
                 raise ValueError("Invalid expression")
-            
-            b = values.pop()
-            a = values.pop()
+
             if isinstance(a, Complex) or isinstance(b, Complex):
                 if not isinstance(a, Complex):
                     a = Complex(a, 0)
@@ -160,9 +158,6 @@ class Calculator:
         return result
 
     
-
-    
-
 class Complex:
     def __init__(self, real, im):
         self.real = real
