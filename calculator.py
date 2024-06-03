@@ -110,7 +110,7 @@ class Calculator:
                 elif op == '*':
                     values.append(a * b)
                 elif op == '/':
-                    if b == 0:
+                    if b == 0 and b.im == 0:
                         raise ValueError("Cannot divide by zero")
                     values.append(a / b)
                 elif op == '^':
