@@ -141,6 +141,15 @@ class Calculator:
             apply_operator(operators.pop())
 
         return values[0]
+        
+        if isinstance(result, Complex):
+            self._save_to_history(f"{expression} = {result.real} + {result.im}i")
+        else:
+            self._save_to_history(f"{expression} = {result}")
+
+        return result
+
+    
 
     
 
