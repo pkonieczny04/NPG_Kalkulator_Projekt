@@ -89,6 +89,8 @@ class Calculator:
                 elif op == '*':
                     values.append(self.multiply(a, b))
                 elif op == '/':
+                    if b == 0:
+                        raise ValueError("Cannot divide by zero")
                     values.append(self.divide(a, b))
                 elif op == '^':
                     values.append(self.power(a, b))
@@ -100,6 +102,8 @@ class Calculator:
                 elif op == '*':
                     values.append(a * b)
                 elif op == '/':
+                    if b == 0:
+                        raise ValueError("Cannot divide by zero")
                     values.append(a / b)
                 elif op == '^':
                     values.append(a ** b)
@@ -137,6 +141,15 @@ class Calculator:
             apply_operator(operators.pop())
 
         return values[0]
+        
+        if isinstance(result, Complex):
+            self._save_to_history(f"{expression} = {result.real} + {result.im}i")
+        else:
+            self._save_to_history(f"{expression} = {result}")
+
+        return result
+
+    
 
     
 
