@@ -111,8 +111,33 @@ class Calculator:
             if op == '^':
                 return 3
             return 0
-        
-        pass
+        i = 0
+        while i < len(tokens):
+            token = tokens[i]
+
+            if re.match(r'\d+\.?\d*', token):
+                if i + 1 < len(tokens) and tokens[i + 1] == 'i':
+                    values.append(Complex(0, float(token)))
+                    i += 1
+                else:
+                    values.append(float(token))
+            elif token == '(':
+                operators.append(token)
+            elif token == ')':
+                while operators and operators[-1] != '(':
+                    apply_operator(operators.pop())
+                operators.pop()
+            else:
+                while (operators and precedence(operators[-1]) >= precedence(token)):
+                    apply_operator(operators.pop())
+                operators.append(token)
+            i += 1
+
+        while operators:
+            apply_operator(operators.pop())
+
+        return values[0]
+
     
 
 class Complex:
