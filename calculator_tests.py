@@ -34,7 +34,7 @@ class TestCalculator(unittest.TestCase):
 
 
     def test_power(self):
-        self.assertAEqual(self.calc.power(2, 3), 8)      # 2 ** 3 = 8
+        self.assertEqual(self.calc.power(2, 3), 8)      # 2 ** 3 = 8
         self.assertEqual(self.calc.power(4, 0.5), 2)    # 4 ** 0.5 = 2 (pierwiastek kwadratowy)
         self.assertEqual(self.calc.power(4, 2), 16)
     
