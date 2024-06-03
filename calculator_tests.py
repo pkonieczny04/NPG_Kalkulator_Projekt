@@ -179,7 +179,9 @@ class TestCalculatorHistory(unittest.TestCase):
         self.calc.clear_history()
 
 class TestCalculatorEvaluateExpression(unittest.TestCase):
-  
+  def setUp(self):
+        self.calc = Calculator()
+        
   def test_evaluate_expression_simple(self):
     self.assertEqual(self.calc.evaluate_expression("2 + 3"), 5)
     self.assertEqual(self.calc.evaluate_expression("4 * 5"), 20)
