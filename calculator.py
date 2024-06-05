@@ -188,12 +188,18 @@ class Complex:
         return Complex(real, im)
 
     def divide(self, other):
-        if other.real == 0 and other.im == 0:
-            raise ValueError("Cannot divide by zero")
-        denominator = other.real ** 2 + other.im ** 2
-        real = (self.real * other.real + self.im * other.im) / denominator
-        im = (self.im * other.real - self.real * other.im) / denominator
-        return Complex(real, im)
+        if isinstance(other, Complex):
+            if other.real == 0 and other.im == 0:
+                raise ValueError("Cannot divide by zero")
+            denominator = other.real ** 2 + other.im ** 2
+            real = (self.real * other.real + self.im * other.im) / denominator
+            im = (self.im * other.real - self.real * other.im) / denominator
+        else:
+            if other == 0:
+                raise ValueError("Cannot divide by zero")
+            real = self.real / other
+            im = self.im / other
+        return Complex(round(real, 10), round(im, 10))
 
 
     
