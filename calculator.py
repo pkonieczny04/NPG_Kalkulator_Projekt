@@ -133,6 +133,11 @@ class Calculator:
                     i += 1
                 else:
                     values.append(float(token))
+            elif token == 'i':
+                if len(values) == 0 or isinstance(values[-1], Complex):
+                    values.append(Complex(0, 1))
+                else:
+                    values[-1] = Complex(0, values.pop())
             elif token == '(':
                 operators.append(token)
             elif token == ')':
