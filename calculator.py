@@ -81,7 +81,7 @@ class Calculator:
         else:
             if a < 0:
                 raise ValueError("Cannot take the square root of a negative number")
-            result = round(math.sqrt(a), 10)  # Poprawka tutaj
+            result = round(math.sqrt(a), 10)
             self._save_to_history(f"sqrt({a}) = {result}")
             return result
 
@@ -176,13 +176,6 @@ class Calculator:
                 apply_operator(op)
 
         return values[0]
-        
-        if isinstance(result, Complex):
-            self._save_to_history(f"{expression} = {result.real} + {result.im}i")
-        else:
-            self._save_to_history(f"{expression} = {result}")
-
-        return result
 
     
 class Complex:
