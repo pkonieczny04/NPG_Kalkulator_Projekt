@@ -74,11 +74,16 @@ class Calculator:
             return result
 
     def sqrt(self, a):
-        if a < 0:
-            raise ValueError("Cannot take the square root of a negative number")
-        result = a ** 0.5
-        self._save_to_history(f"sqrt({a}) = {result}")
-        return result  
+        if isinstance(a, Complex):
+            result = a.sqrt()
+            self._save_to_history(f"sqrt({a.real} + {a.im}i) = ({result.real} + {result.im}i)")
+            return result
+        else:
+            if a < 0:
+                raise ValueError("Cannot take the square root of a negative number")
+            result = round(math.sqrt(a), 10)  # Poprawka tutaj
+            self._save_to_history(f"sqrt({a}) = {result}")
+            return result
 
     def evaluate_expression(self, expression):
         expression = expression.replace(' ', '')
