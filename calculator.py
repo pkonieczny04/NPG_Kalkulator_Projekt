@@ -144,6 +144,8 @@ class Calculator:
                 while operators and operators[-1] != '(':
                     apply_operator(operators.pop())
                 operators.pop()
+            elif token == 'sqrt':  
+                operators.append(token)
             else:
                 while (operators and precedence(operators[-1]) >= precedence(token)):
                     apply_operator(operators.pop())
