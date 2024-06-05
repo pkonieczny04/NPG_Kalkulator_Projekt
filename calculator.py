@@ -60,9 +60,18 @@ class Calculator:
             return a / b
 
     def power(self, a, b):
-        result = a ** b
-        self._save_to_history(f"{a} ^ {b} = {result}")
-        return result
+        if isinstance(a, Complex) or isinstance(b, Complex):
+            if not isinstance(a, Complex):
+                a = Complex(a, 0)
+            if not isinstance(b, Complex):
+                b = Complex(b, 0)
+            result = a.power(b)
+            self._save_to_history(f"({a.real} + {a.im}i) ^ ({b.real} + {b.im}i) = ({result.real} + {result.im}i)")
+            return result
+        else:
+            result = a ** b
+            self._save_to_history(f"{a} ^ {b} = {result}")
+            return result
 
     def sqrt(self, a):
         if a < 0:
