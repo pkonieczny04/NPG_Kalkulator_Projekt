@@ -112,7 +112,7 @@ class Calculator:
                 elif op == '/':
                     if b == 0:
                         raise ValueError("Cannot divide by zero")
-                    values.append(a / b)
+                    values.append(round(a / b, 10))
                 elif op == '^':
                     values.append(a ** b)
         def precedence(op):
