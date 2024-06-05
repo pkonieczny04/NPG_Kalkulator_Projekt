@@ -200,6 +200,15 @@ class Complex:
             real = self.real / other
             im = self.im / other
         return Complex(round(real, 10), round(im, 10))
+    
+    def power(self, other):
+        if other.real == 0 and other.im == 0:
+            return Complex(1, 0)
+        elif self.real == 0 and self.im == 0:
+            return Complex(0, 0)
+        else:
+            c = complex(self.real, self.im) ** complex(other.real, other.im)
+            return Complex(round(c.real, 10), round(c.imag, 10))
 
 
     
