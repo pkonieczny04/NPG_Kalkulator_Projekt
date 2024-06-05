@@ -153,7 +153,13 @@ class Calculator:
             i += 1
 
         while operators:
-            apply_operator(operators.pop())
+            op = operators.pop()
+            if op == 'sqrt':  
+                if len(values) == 0:
+                    raise ValueError("Invalid expression")
+                values.append(self.sqrt(values.pop()))
+            else:
+                apply_operator(op)
 
         return values[0]
         
