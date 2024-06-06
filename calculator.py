@@ -74,24 +74,18 @@ class Calculator:
             if not isinstance(b, Complex):
                 b = Complex(b, 0)
             result = a.power(b)
-            self._save_to_history(f"({a.real} + {a.im}i) ^ ({b.real} + {b.im}i) = ({result.real} + {result.im}i)")
             return result
         else:
-            result = a ** b
-            self._save_to_history(f"{a} ^ {b} = {result}")
-            return result
+            return a ** b
 
     def sqrt(self, a):
         if isinstance(a, Complex):
             result = a.sqrt()
-            self._save_to_history(f"sqrt({a.real} + {a.im}i) = ({result.real} + {result.im}i)")
             return result
         else:
             if a < 0:
                 raise ValueError("Cannot take the square root of a negative number")
-            result = round(math.sqrt(a), 10)
-            self._save_to_history(f"sqrt({a}) = {result}")
-            return result
+            return round(math.sqrt(a), 10)
 
     def evaluate_expression(self, expression):
         expression = expression.replace(' ', '')
