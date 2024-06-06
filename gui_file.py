@@ -16,7 +16,7 @@ class CalculatorGUI:
         button_texts = [
             "7", "8", "9", "/", "4", "5", "6", "*", 
             "1", "2", "3", "-", "0", ".", "=", "+", 
-            "(", ")", "sqrt", "clear", "^", "i"
+            "(", ")", "sqrt", "clear", "^", "i", "History"
         ]
         row = 1
         col = 0
@@ -29,7 +29,29 @@ class CalculatorGUI:
                 col = 0
                 row += 1
 
+    def on_button_click(self, char):
+        if char == "=":
+            self.evaluate_expression()
+        elif char == "clear":
+            self.expression = ""
+            self.entry.delete(0, tk.END)
+        elif char == "History":
+            self.show_history()
+        else:
+            self.expression += str(char)
+            self.entry.insert(tk.END, char)
 
+    def evaluate_expression(self):
+        try:
+            result = self.calc.evaluate_expression(self.expression)
+            display_result = f"{result.real} + {result.im}i" if isinstance(result, Complex) else str(result)
+            self.entry.delete(0, tk.END)
+            self.entry.insert(tk.END, display_result)
+            self.expression = ""
+        except Exception as e:
+            messagebox.showerror("Error", str(e))
+            self.expression = ""
+            self.entry.delete(0, tk.END)
 
 
 
