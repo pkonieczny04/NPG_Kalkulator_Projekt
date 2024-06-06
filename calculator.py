@@ -95,7 +95,7 @@ class Calculator:
         operators = []
 
         def apply_operator(op):
-            if len(values) < 2: 
+            if len(values) < 2:
                 raise ValueError("Invalid expression")
             
             b = values.pop()
@@ -106,15 +106,13 @@ class Calculator:
                     a = Complex(a, 0)
                 if not isinstance(b, Complex):
                     b = Complex(b, 0)
-                elif op == '+':
+                if op == '+':
                     values.append(self.add(a, b))
                 elif op == '-':
                     values.append(self.subtract(a, b))
                 elif op == '*':
                     values.append(self.multiply(a, b))
                 elif op == '/':
-                    if b.real == 0 and b.im == 0:
-                        raise ValueError("Cannot divide by zero")
                     values.append(self.divide(a, b))
                 elif op == '^':
                     values.append(self.power(a, b))
@@ -128,9 +126,10 @@ class Calculator:
                 elif op == '/':
                     if b == 0:
                         raise ValueError("Cannot divide by zero")
-                    values.append(round(a / b, 10))
+                    values.append(a / b)
                 elif op == '^':
                     values.append(a ** b)
+
         def precedence(op):
             if op in ('+', '-'):
                 return 1
@@ -139,6 +138,7 @@ class Calculator:
             if op == '^':
                 return 3
             return 0
+
         i = 0
         while i < len(tokens):
             token = tokens[i]
@@ -160,8 +160,6 @@ class Calculator:
                 while operators and operators[-1] != '(':
                     apply_operator(operators.pop())
                 operators.pop()
-            elif token == 'sqrt':  
-                operators.append(token)
             else:
                 while (operators and precedence(operators[-1]) >= precedence(token)):
                     apply_operator(operators.pop())
@@ -169,19 +167,11 @@ class Calculator:
             i += 1
 
         while operators:
-            op = operators.pop()
-            if op == 'sqrt':  
-                if len(values) == 0:
-                    raise ValueError("Invalid expression")
-                values.append(self.sqrt(values.pop()))
-            else:
-                apply_operator(op)
+            apply_operator(operators.pop())
 
         result = values[0]
-        if isinstance(result, Complex):
-            self._save_to_history(f"{expression} = {result.real} + {result.im}i")
-        else:
-            self._save_to_history(f"{expression} = {result}")
+        result_str = self._format_result(result)
+        self._save_to_history(f"{expression} = {result_str}")
 
         return result
 
