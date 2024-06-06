@@ -44,23 +44,27 @@ class Calculator:
             return a - b
 
     def multiply(self, a, b):
-        if isinstance(a, Complex) and isinstance(b, Complex):
+        if isinstance(a, Complex) or isinstance(b, Complex):
+            if not isinstance(a, Complex):
+                a = Complex(a, 0)
+            if not isinstance(b, Complex):
+                b = Complex(b, 0)
             result = a.multiply(b)
-            self._save_to_history(f"({a.real} + {a.im}i) * ({b.real} + {b.im}i) = ({result.real} + {result.im}i)")
             return result
         else:
-            self._save_to_history(f"{a} * {b} = {a*b}")
             return a * b
 
     def divide(self, a, b):
-        if isinstance(a, Complex) and isinstance(b, Complex):
+        if isinstance(a, Complex) or isinstance(b, Complex):
+            if not isinstance(a, Complex):
+                a = Complex(a, 0)
+            if not isinstance(b, Complex):
+                b = Complex(b, 0)
             result = a.divide(b)
-            self._save_to_history(f"({a.real} + {a.im}i) / ({b.real} + {b.im}i) = ({result.real} + {result.im}i)")
             return result
         else:
             if b == 0:
                 raise ValueError("Cannot divide by zero")
-            self._save_to_history(f"{a} / {b} = {a/b}")
             return a / b
 
     def power(self, a, b):
