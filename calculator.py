@@ -219,6 +219,7 @@ class Complex:
             c = complex(self.real, self.im) ** complex(other.real, other.im)
             return Complex(round(c.real, 10), round(c.imag, 10))
 
-
+    def repr(self):
+        return f"{self.real} + {self.im}i" if self.im >= 0 else f"{self.real} - {-self.im}i"
 
     
