@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from calculator import Calculator, Complex
 
 class CalculatorGUI:
     def __init__(self, root):
@@ -8,6 +9,7 @@ class CalculatorGUI:
         self.expression = ""
         self.entry = tk.Entry(root, width=40, borderwidth=5)
         self.entry.grid(row=0, column=0, columnspan=4)
+        self.create_buttons()
 
 
     def create_buttons(self):
@@ -26,3 +28,21 @@ class CalculatorGUI:
             if col == 4:
                 col = 0
                 row += 1
+
+
+
+
+
+
+
+
+
+    def show_history(self):
+        history_window = tk.Toplevel(self.root)
+        history_window.title("History")
+        history_text = tk.Text(history_window, wrap=tk.WORD)
+        history_text.pack(expand=True, fill=tk.BOTH)
+        
+        for index, operation in enumerate(self.calc.history, start=1):
+            history_text.insert(tk.END, f"{index}. {operation}\n")
+        history_text.config(state=tk.DISABLED)
