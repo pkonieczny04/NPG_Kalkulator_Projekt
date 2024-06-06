@@ -175,7 +175,11 @@ class Calculator:
 
         return result
 
-    
+    def format_result(self, result):
+        if isinstance(result, Complex):
+            return f"{result.real} + {result.im}i" if result.im >= 0 else f"{result.real} - {-result.im}i"
+        else:
+            return str(result)
 class Complex:
     def __init__(self, real, im):
         self.real = real
