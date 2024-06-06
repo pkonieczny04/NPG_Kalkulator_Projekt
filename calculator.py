@@ -1,5 +1,5 @@
-#Plik nagłówkowy
-import math, re
+import math
+import re
 
 class Calculator:
 
@@ -12,7 +12,6 @@ class Calculator:
         else:
             self.history.pop(0)
             self.history.append(operation)
-            
 
     def get_history(self):
         for i in self.history:
@@ -20,74 +19,105 @@ class Calculator:
 
     def clear_history(self):
         self.history.clear()
-         
-    def add(self, a, b):
+
+    def add(self, a, b, save_history=True):
         if isinstance(a, Complex) or isinstance(b, Complex):
             if not isinstance(a, Complex):
                 a = Complex(a, 0)
             if not isinstance(b, Complex):
                 b = Complex(b, 0)
             result = a.add(b)
+            if save_history:
+                self._save_to_history(f"({a}) + ({b}) = {result}")
             return result
         else:
-            return a + b
+            result = a + b
+            if save_history:
+                self._save_to_history(f"{a} + {b} = {result}")
+            return result
 
-    def subtract(self, a, b):
+    def subtract(self, a, b, save_history=True):
         if isinstance(a, Complex) or isinstance(b, Complex):
             if not isinstance(a, Complex):
                 a = Complex(a, 0)
             if not isinstance(b, Complex):
                 b = Complex(b, 0)
             result = a.subtract(b)
+            if save_history:
+                self._save_to_history(f"({a}) - ({b}) = {result}")
             return result
         else:
-            return a - b
+            result = a - b
+            if save_history:
+                self._save_to_history(f"{a} - {b} = {result}")
+            return result
 
-    def multiply(self, a, b):
+    def multiply(self, a, b, save_history=True):
         if isinstance(a, Complex) or isinstance(b, Complex):
             if not isinstance(a, Complex):
                 a = Complex(a, 0)
             if not isinstance(b, Complex):
                 b = Complex(b, 0)
             result = a.multiply(b)
+            if save_history:
+                self._save_to_history(f"({a}) * ({b}) = {result}")
             return result
         else:
-            return a * b
+            result = a * b
+            if save_history:
+                self._save_to_history(f"{a} * {b} = {result}")
+            return result
 
-    def divide(self, a, b):
+    def divide(self, a, b, save_history=True):
         if isinstance(a, Complex) or isinstance(b, Complex):
             if not isinstance(a, Complex):
                 a = Complex(a, 0)
             if not isinstance(b, Complex):
                 b = Complex(b, 0)
             result = a.divide(b)
+            if save_history:
+                self._save_to_history(f"({a}) / ({b}) = {result}")
             return result
         else:
             if b == 0:
                 raise ValueError("Cannot divide by zero")
-            return a / b
+            result = a / b
+            if save_history:
+                self._save_to_history(f"{a} / {b} = {result}")
+            return result
 
-    def power(self, a, b):
+    def power(self, a, b, save_history=True):
         if isinstance(a, Complex) or isinstance(b, Complex):
             if not isinstance(a, Complex):
                 a = Complex(a, 0)
             if not isinstance(b, Complex):
                 b = Complex(b, 0)
             result = a.power(b)
+            if save_history:
+                self._save_to_history(f"({a}) ^ ({b}) = {result}")
             return result
         else:
-            return a ** b
+            result = round(a ** b, 10)
+            if save_history:
+                self._save_to_history(f"{a} ^ {b} = {result}")
+            return result
 
-    def sqrt(self, a):
+    def sqrt(self, a, save_history=True):
         if isinstance(a, Complex):
             result = a.sqrt()
+            if save_history:
+                self._save_to_history(f"sqrt({a}) = {result}")
             return result
         else:
             if a < 0:
                 raise ValueError("Cannot take the square root of a negative number")
-            return round(math.sqrt(a), 10)
+            result = round(math.sqrt(a), 10)
+            if save_history:
+                self._save_to_history(f"sqrt({a}) = {result}")
+            return result
 
     def evaluate_expression(self, expression):
+        original_expression = expression
         expression = expression.replace(' ', '')
         tokens = re.findall(r'\d+\.?\d*|\+|\-|\*|\/|\^|\(|\)|i', expression)
 
@@ -107,15 +137,15 @@ class Calculator:
                 if not isinstance(b, Complex):
                     b = Complex(b, 0)
                 if op == '+':
-                    values.append(self.add(a, b))
+                    values.append(self.add(a, b, save_history=False))
                 elif op == '-':
-                    values.append(self.subtract(a, b))
+                    values.append(self.subtract(a, b, save_history=False))
                 elif op == '*':
-                    values.append(self.multiply(a, b))
+                    values.append(self.multiply(a, b, save_history=False))
                 elif op == '/':
-                    values.append(self.divide(a, b))
+                    values.append(self.divide(a, b, save_history=False))
                 elif op == '^':
-                    values.append(self.power(a, b))
+                    values.append(self.power(a, b, save_history=False))
             else:
                 if op == '+':
                     values.append(a + b)
@@ -128,7 +158,7 @@ class Calculator:
                         raise ValueError("Cannot divide by zero")
                     values.append(a / b)
                 elif op == '^':
-                    values.append(a ** b)
+                    values.append(round(a ** b, 10))
 
         def precedence(op):
             if op in ('+', '-'):
@@ -171,15 +201,17 @@ class Calculator:
 
         result = values[0]
         result_str = self._format_result(result)
-        self._save_to_history(f"{expression} = {result_str}")
+        self._save_to_history(f"{original_expression} = {result_str}")
 
         return result
 
-    def format_result(self, result):
+    def _format_result(self, result):
         if isinstance(result, Complex):
-            return f"{result.real} + {result.im}i" if result.im >= 0 else f"{result.real} - {-result.im}i"
+            return str(result)
         else:
             return str(result)
+
+
 class Complex:
     def __init__(self, real, im):
         self.real = real
@@ -219,7 +251,13 @@ class Complex:
             c = complex(self.real, self.im) ** complex(other.real, other.im)
             return Complex(round(c.real, 10), round(c.imag, 10))
 
-    def repr(self):
+    def sqrt(self):
+        c = complex(self.real, self.im)
+        result = c ** 0.5
+        return Complex(round(result.real, 10), round(result.imag, 10))
+
+    def __repr__(self):
         return f"{self.real} + {self.im}i" if self.im >= 0 else f"{self.real} - {-self.im}i"
 
-    
+    def __str__(self):
+        return self.__repr__()
